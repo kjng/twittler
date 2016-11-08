@@ -47,6 +47,12 @@
           var myClass = "." + $(this).closest('div').attr('class');
           $("div").not(myClass).hide();
           clearInterval(interval);
+          $body.append('<a id="back" href="#">Back</a>');
+        });
+
+        $body.on('click', '#back', function() {
+          loadPage();
+          interval = setInterval(loadPage, 3000);
         });
 
       });
