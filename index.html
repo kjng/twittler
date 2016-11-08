@@ -9,31 +9,43 @@
 
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('');
+        
+        var loadPage = function() {
 
-        for (var i = streams.home.length - 1; i >= 0; i--) {
-          var tweet = streams.home[i];
-          var tweetTime = tweet.created_at;
-          var time = (function() {
-            var amOrPm = 'am';
-            var convHours = tweetTime.getHours();
-            var convMinutes = tweetTime.getMinutes().toString();
+          $body.html('');
 
-            if (tweetTime.getHours() >= 12) {
-              convHours = tweetTime.getHours() % 12;
-              amOrPm = 'pm';
-            }
+          for (var i = streams.home.length - 1; i >= 0; i--) {
+            var tweet = streams.home[i];
+            var tweetTime = tweet.created_at;
+            var time = (function() {
+              var amOrPm = 'am';
+              var convHours = tweetTime.getHours();
+              var convMinutes = tweetTime.getMinutes().toString();
 
-            if (convMinutes.length === 1) {
-              convMinutes = '0' + convMinutes;
-            }
+              if (tweetTime.getHours() >= 12) {
+                convHours = tweetTime.getHours() % 12;
+                amOrPm = 'pm';
+              }
 
-            return convHours + ':' + convMinutes + ' ' + amOrPm;
-          })();
-          var $tweet = $('<div></div>');
-          $tweet.text(time + ' ' + '@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-        }
+              if (convMinutes.length === 1) {
+                convMinutes = '0' + convMinutes;
+              }
+
+              return convHours + ':' + convMinutes + ' ' + amOrPm;
+            })();
+            var $tweet = $('<div class="' + tweet.user + '"></div>');
+            $tweet.text(time + ' ' + '@');
+            $tweet.append('<a class="user" href="#">' + tweet.user + '</a>');
+            $tweet.append(': ' + tweet.message);
+            $tweet.appendTo($body);
+          }
+        };
+        loadPage();
+
+        $('a.user').on('click', function() {
+          var myClass = "." + $(this).closest('div').attr('class');
+          $("div").not(myClass).hide();
+        });
 
       });
 
