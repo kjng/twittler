@@ -41,6 +41,7 @@
           }
         };
         loadPage();
+        setInterval(loadPage, 3000);
 
         $('a.user').on('click', function() {
           var myClass = "." + $(this).closest('div').attr('class');
