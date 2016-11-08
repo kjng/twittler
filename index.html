@@ -41,11 +41,12 @@
           }
         };
         loadPage();
-        setInterval(loadPage, 3000);
+        var interval = setInterval(loadPage, 3000);
 
-        $('a.user').on('click', function() {
+        $body.on('click', 'a.user', function() {
           var myClass = "." + $(this).closest('div').attr('class');
           $("div").not(myClass).hide();
+          clearInterval(interval);
         });
 
       });
