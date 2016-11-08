@@ -11,13 +11,28 @@
         var $body = $('body');
         $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
+        for (var i = streams.home.length - 1; i >= 0; i--) {
+          var tweet = streams.home[i];
+          var tweetTime = tweet.created_at;
+          var time = (function() {
+            var amOrPm = 'am';
+            var convHours = tweetTime.getHours();
+            var convMinutes = tweetTime.getMinutes().toString();
+
+            if (tweetTime.getHours() >= 12) {
+              convHours = tweetTime.getHours() % 12;
+              amOrPm = 'pm';
+            }
+
+            if (convMinutes.length === 1) {
+              convMinutes = '0' + convMinutes;
+            }
+
+            return convHours + ':' + convMinutes + ' ' + amOrPm;
+          })();
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          $tweet.text(time + ' ' + '@' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body);
-          index -= 1;
         }
 
       });
