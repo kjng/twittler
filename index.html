@@ -3,6 +3,18 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <style>
+    	div {
+    		border: 2px solid #7C7CFF;
+    		border-radius: 5px;
+    		width: 600px;
+    		padding: 5px 0 5px 10px;
+    		margin: 2px 0;
+    	}
+    	.timeline {
+    		border-color: #FF5B5B;
+    	}
+    </style>
   </head>
   <body>
     <script>
@@ -44,10 +56,14 @@
         var interval = setInterval(loadPage, 3000);
 
         $body.on('click', 'a.user', function() {
-          var myClass = "." + $(this).closest('div').attr('class');
+          var myClass = '.' + $(this).closest('div').attr('class');
           $("div").not(myClass).hide();
+          $(myClass).addClass('timeline');
           clearInterval(interval);
-          $body.append('<a id="back" href="#">Back</a>');
+          
+          if($('#back').length === 0){
+            $body.append('<a id="back" href="#">Back</a>');
+          }
         });
 
         $body.on('click', '#back', function() {
