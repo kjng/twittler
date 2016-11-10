@@ -16,7 +16,7 @@
     		margin: 2px 0;
     	}
 
-    	.timeline {
+    	#back-button {
     		border-color: #FF5B5B;
     	}
     </style>
@@ -63,12 +63,9 @@
         $body.on('click', 'a.user', function() {
           var myClass = '.' + $(this).closest('div').attr('class');
           $("div").not(myClass).hide();
-          $(myClass).addClass('timeline');
           clearInterval(interval);
           
-          if($('#back').length === 0){
-            $body.append('<div><a id="back" href="#">Back</a></div>');
-          }
+          $body.append('<div id="back-button"><a id="back" href="#">Back</a></div>');
         });
 
         $body.on('click', '#back', function() {
@@ -77,7 +74,6 @@
         });
 
       });
-
     </script>
   </body>
 </html>
