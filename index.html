@@ -4,6 +4,10 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <style>
+      body {
+        font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      }
+
     	div {
     		border: 2px solid #7C7CFF;
     		border-radius: 5px;
@@ -11,6 +15,7 @@
     		padding: 5px 0 5px 10px;
     		margin: 2px 0;
     	}
+
     	.timeline {
     		border-color: #FF5B5B;
     	}
@@ -62,7 +67,7 @@
           clearInterval(interval);
           
           if($('#back').length === 0){
-            $body.append('<a id="back" href="#">Back</a>');
+            $body.append('<div><a id="back" href="#">Back</a></div>');
           }
         });
 
