@@ -3,6 +3,7 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <style>
       body {
         font-family: 'Helvetica Neue', Helvetica, sans-serif;
@@ -33,25 +34,29 @@
 
           for (var i = streams.home.length - 1; i >= 0; i--) {
             var tweet = streams.home[i];
-            var tweetTime = tweet.created_at;
-            var time = (function() {
-              var amOrPm = 'am';
-              var convHours = tweetTime.getHours();
-              var convMinutes = tweetTime.getMinutes().toString();
 
-              if (tweetTime.getHours() >= 12) {
-                convHours = tweetTime.getHours() % 12;
-                amOrPm = 'pm';
-              }
+            // var tweetTime = tweet.created_at;
+            // var time = (function() {
+            //   var amOrPm = 'am';
+            //   var convHours = tweetTime.getHours();
+            //   var convMinutes = tweetTime.getMinutes().toString();
 
-              if (convMinutes.length === 1) {
-                convMinutes = '0' + convMinutes;
-              }
+            //   if (tweetTime.getHours() >= 12) {
+            //     convHours = tweetTime.getHours() % 12;
+            //     amOrPm = 'pm';
+            //   }
 
-              return convHours + ':' + convMinutes + ' ' + amOrPm;
-            })();
+            //   if (convMinutes.length === 1) {
+            //     convMinutes = '0' + convMinutes;
+            //   }
+
+            //   return convHours + ':' + convMinutes + ' ' + amOrPm;
+            // })();
+            // $tweet.text(time + ' @');
+            
             var $tweet = $('<div class="' + tweet.user + '"></div>');
-            $tweet.text(time + ' ' + '@');
+
+            $tweet.text(moment(tweet.created_at).fromNow() + ' @');
             $tweet.append('<a class="user" href="#">' + tweet.user + '</a>');
             $tweet.append(': ' + tweet.message);
             $tweet.appendTo($body);
